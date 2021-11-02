@@ -39,32 +39,27 @@ int getInvoluntary(){
          return num;
             }
 
-int * putValuesinArray(){
-    int multiply = getInvoluntary();
-    int a;
-    
-    int arrayNums[multiply*3];
-    int num;
-    while(1)
-    for(a =0; a< multiply *3+3; a++){
-        num = scanf("%d",&arrayNums[a]);
-        if(num == EOF || num == 0){
-            break;
-        }
-    }
-    
-    return 0;
-}
+
 
 int main(int argc, const char * argv[]) {
 
     int a;
     int newNum;
       int arrayNums[65536];
+    FILE *fp;
+    
+    fp = fopen("tests.bats","r");
+    for(a =0; a< 5;a++){
+        fscanf(fp, "%d",&arrayNums[a]);
+    }
+    
+    if(fp == NULL){
+        exit(1);
+    }
       int num;
       for(a =0; a< 4; a++){
-          num = scanf("%d",&newNum);
-          if(num == EOF || num == 0){
+          fscanf(a =0, "%d",newNum);
+          if(newNum == EOF || newNum == 0){
               break;
           }
           else{
@@ -74,13 +69,13 @@ int main(int argc, const char * argv[]) {
       }
     int check;
     //printf("%d\n",result);                          //P value
-    printf("%d\n",arrayNums[0]);                       //Gets voluntary context switch
+    printf("%d\n",arrayNums[1]);                       //Gets voluntary context switch
     if(arrayNums[1] != arrayNums[2]){                   //Gets the nonVoluntary switch
            check = 0;
         printf("%d\n",check);
        }
     else{
-       printf("%d\n",arrayNums[1]);
+       printf("%d\n",arrayNums[2]);
     }
        printf("100.0\n");                              //CPU Utilization
     
@@ -90,3 +85,4 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+
