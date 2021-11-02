@@ -74,13 +74,13 @@ int main(int argc, const char * argv[]) {
       }
     int check;
     //printf("%d\n",result);                          //P value
-    printf("%d\n",arrayNums[1]);                       //Gets voluntary context switch
+    printf("%d\n",arrayNums[0]);                       //Gets voluntary context switch
     if(arrayNums[1] != arrayNums[2]){                   //Gets the nonVoluntary switch
            check = 0;
         printf("%d\n",check);
        }
     else{
-       printf("%d\n",arrayNums[2]);
+       printf("%d\n",arrayNums[1]);
     }
        printf("100.0\n");                              //CPU Utilization
     
