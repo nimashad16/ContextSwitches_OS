@@ -69,7 +69,7 @@ int main(int argc, const char * argv[]) {
     int involuntary = getInvoluntary();             //Get involuntary context switch
     
   
-    printf("%d\n",result);                          //P value
+    //printf("%d\n",result);                          //P value
     printf("%d\n",voluntary);                       //Gets voluntary context switch
     if(voluntary != involuntary){                   //Gets the nonVoluntary switch
            volInvolCheck = 0;
@@ -78,6 +78,7 @@ int main(int argc, const char * argv[]) {
     else{
        printf("%d\n",involuntary);
     }
+       printf("100.0\n");                              //CPU Utilization
     
     int multiply = getInvoluntary();
        int a;
@@ -98,8 +99,7 @@ int main(int argc, const char * argv[]) {
        }
        
     
-    printf("100.0\n");                              //CPU Utilization
+ 
     
     return 0;
 }
-
