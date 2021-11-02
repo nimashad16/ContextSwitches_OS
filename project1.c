@@ -17,26 +17,26 @@ struct info{
 int getPValue(){
     int check;
     int num;
-                    num = scanf("%d",&check);
+                    num = fgetc(stdin);
     
-    return check;
+    return num;
     }
     
 int getVoluntary(){
     int voluntary;
       int num;
-        num = scanf("%d",&voluntary);
+        num = fgetc(stdin);
       
-      return voluntary;
+      return num;
          }
 
 int getInvoluntary(){
     int Involuntary;
          int num;
          
-                         num = scanf("%d",&Involuntary);
+                         num = fgetc(stdin);
          
-         return Involuntary;
+         return num;
             }
 
 int * putValuesinArray(){
@@ -44,16 +44,12 @@ int * putValuesinArray(){
     int a;
     
     int arrayNums[multiply*3];
-    int newNum;
     int num;
     while(1)
-    for(a =0; a< multiply *3; a++){
-        num = scanf("%d",&newNum);
+    for(a =0; a< multiply *3+3; a++){
+        num = scanf("%d",&arrayNums[a]);
         if(num == EOF || num == 0){
             break;
-        }
-        else{
-            arrayNums[a] = newNum;
         }
     }
     
@@ -62,42 +58,33 @@ int * putValuesinArray(){
 
 int main(int argc, const char * argv[]) {
 
-    int volInvolCheck;
-    
-    int result = getPValue();                       //Gets the P value
-    int voluntary = getVoluntary();                 //Get voluntary context switch
-    int involuntary = getInvoluntary();             //Get involuntary context switch
-    
-  
+    int a;
+    int newNum;
+      int arrayNums[65536];
+      int num;
+      for(a =0; a< 4; a++){
+          num = scanf("%d",&newNum);
+          if(num == EOF || num == 0){
+              break;
+          }
+          else{
+              arrayNums[a] = newNum;
+          }
+          
+      }
+    int check;
     //printf("%d\n",result);                          //P value
-    printf("%d\n",voluntary);                       //Gets voluntary context switch
-    if(voluntary != involuntary){                   //Gets the nonVoluntary switch
-           volInvolCheck = 0;
-        printf("%d\n",volInvolCheck);
+    printf("%d\n",arrayNums[1]);                       //Gets voluntary context switch
+    if(arrayNums[1] != arrayNums[2]){                   //Gets the nonVoluntary switch
+           check = 0;
+        printf("%d\n",check);
        }
     else{
-       printf("%d\n",involuntary);
+       printf("%d\n",arrayNums[2]);
     }
        printf("100.0\n");                              //CPU Utilization
     
-    int multiply = getInvoluntary();
-       int a;
-       
-       int arrayNums[multiply*3];
-       int newNum;
-       int num;
-    
-       for(a =0; a< multiply *3; a++){
-           num = scanf("%d",&newNum);
-           if(num == EOF || num == 0){
-               break;
-           }
-           else{
-               arrayNums[a] = newNum;
-               
-           }
-       }
-       
+
     
  
     
