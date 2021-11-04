@@ -43,7 +43,7 @@ float getThroughput(struct ProcessInfo *array, int size){
         a++;
     }
     
-    for(int b =0; b <= 4;b++){              //Adds all of them up together from the new array
+    for(int b =0; b <= size;b++){              //Adds all of them up together from the new array
         sum += newArray[b].bVar;
     }
     
@@ -94,17 +94,17 @@ int getTurnAroundTime(struct Process processQueue[],struct ProcessInfo array[], 
 }
 
     
-/*int getResponseTime(struct Process processQueue[],struct ProcessInfo array[], int pQSize){                      //First time - Arrival Time
+int getResponseTime(struct ProcessInfo array[], int size, int numVals){                      //First time - Arrival Time
     
-    int count;
-    for(int x =0; x< pQSize; x++){
-            if(newP == arrayNums[x]){
+    int count =0;
+    for(int x =0; x< size; x++){
+            if(numVals == array[x].PID){
                 count++;
             }
         }
     int sum =0;
-    for(int idx =0; idx < pQSize; idx++){
-        sum += array[idx];
+    for(int idx =0; idx < size; idx++){
+        sum += array[idx].bVar;
     }
     
     sum /= count;
@@ -112,7 +112,6 @@ int getTurnAroundTime(struct Process processQueue[],struct ProcessInfo array[], 
     return sum;
     
     }
-*/
 
 int main(int argc, const char * argv[]) {
     int start;
@@ -149,5 +148,4 @@ int main(int argc, const char * argv[]) {
    
     return 0;
 }
-
 
