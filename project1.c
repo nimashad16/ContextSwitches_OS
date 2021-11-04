@@ -144,9 +144,10 @@ int main(int argc, const char * argv[]) {
     printf("%.02f\n",result);
     //float wait = getWaitingTime(arrayStore.PID,arrayStore.bVar,numVals);
     //getResponseTime(, , numVals);
-    printf("0.02f\n",wait);
+    //printf("0.02f\n",wait);
                            //Throughput
    
     return 0;
 }
+
 
