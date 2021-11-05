@@ -116,27 +116,28 @@ int main(int argc, const char * argv[]) {
     int start;
     
     int a;
-     FILE *fp = fopen(argv[1],"r");
+    FILE *fp;
       struct ProcessInfo arrayStore[98307];
     
     int newP;
        int numVals;
-    if(fp == NULL){
-        scanf("%d", &start);
-        scanf("%d",&newP);
-        scanf("%d",&numVals);
-        for(a =0; a<numVals; ++a ){
-        scanf("%d %d %d", &arrayStore[a].PID, &arrayStore[a].bVar,&arrayStore[a].priorID);
-                  }
-    }
+
+    if(argc != 1){
+           fp = fopen(argv[1],"r");
+                fscanf(fp,"%d", &start);
+                fscanf(fp,"%d", &newP);
+                fscanf(fp,"%d", &numVals);
+                
+                for(a =0; a<numVals; ++a ){
+                    fscanf(fp,"%d %d %d", &arrayStore[a].PID, &arrayStore[a].bVar,&arrayStore[a].priorID);
+                }
+        }
     else{
-           fscanf(fp,"%d", &start);
-           fscanf(fp,"%d", &newP);
-           fscanf(fp,"%d", &numVals);
-           
-           for(a =0; a<numVals; ++a ){
-               fscanf(fp,"%d %d %d", &arrayStore[a].PID, &arrayStore[a].bVar,&arrayStore[a].priorID);
-           }
+          scanf("%d", &start);
+                   scanf("%d",&newP);
+                   scanf("%d",&numVals);
+                   for(a =0; a<numVals; ++a ){
+                   scanf("%d %d %d", &arrayStore[a].PID, &arrayStore[a].bVar,&arrayStore[a].priorID);
     }
     
     
@@ -154,5 +155,8 @@ int main(int argc, const char * argv[]) {
     getResponseTime(arrayStore,numVals,newP);
 
     return 0;
+    }
+    
 }
+
 
