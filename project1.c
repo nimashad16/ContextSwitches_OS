@@ -95,7 +95,7 @@ int main(int argc, char * argv[]) {
     int numPIDs;
     int numProcesses;
     FILE* fp;
-    if (argc < 1) {
+    if (argc > 1) {
         fp = fopen(argv[1],"r");
        
     }
