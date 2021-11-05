@@ -79,10 +79,10 @@ void getTimeInfos(struct Process processQueue[],struct ProcessInfo array[], int 
   
        printf("%d\n", nonVoluntarySwitches);                               //nonVoluntary
        printf("100.0\n");                                  //CPU Utilization
-       printf("%0.02f",avgThroughput);                        //Throughput
-       printf("%0.02f",avgTurnAroundTime);                         //TurnAround
-       printf("%0.02f", avgWaitingTime);                          //WaitingTime
-       printf("%0.02f", rTime);                          //rTime
+    printf("%0.2d",avgThroughput);                        //Throughput
+    printf("%0.2d",avgTurnAroundTime);                         //TurnAround
+    printf("%0.2d", avgWaitingTime);                          //WaitingTime
+    printf("%0.2d", rTime);                          //rTime
     
     // return nonVoluntarySwitches,avgThroughput,avgTurnAroundTime,avgWaitingTime,rTime;
 }
@@ -124,6 +124,8 @@ int main(int argc, char * argv[]) {
     return 0;
     }
     
+
+
 
 
 
