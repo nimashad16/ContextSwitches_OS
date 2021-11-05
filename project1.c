@@ -27,7 +27,7 @@ struct ProcessInfo{
 
 
 
-void getTimeInfos(struct Process processQueue[],struct ProcessInfo array[], int numProcesses, int numPIDs){
+int getTimeInfos(struct Process processQueue[],struct ProcessInfo array[], int numProcesses, int numPIDs){
     int totalContextSwitches = 0;
     int voluntarySwitches = 0;
     int nonVoluntarySwitches;
@@ -77,14 +77,14 @@ void getTimeInfos(struct Process processQueue[],struct ProcessInfo array[], int 
      avgWaitingTime /= numPIDs;
      rTime /= numPIDs;
   
-       printf("%d\n", nonVoluntarySwitches);                               //nonVoluntary
+    /*   printf("%d\n", nonVoluntarySwitches);                               //nonVoluntary
        printf("100.0\n");                                  //CPU Utilization
     printf("%0.2d",avgThroughput);                        //Throughput
     printf("%0.2d",avgTurnAroundTime);                         //TurnAround
     printf("%0.2d", avgWaitingTime);                          //WaitingTime
     printf("%0.2d", rTime);                          //rTime
-    
-    // return nonVoluntarySwitches,avgThroughput,avgTurnAroundTime,avgWaitingTime,rTime;
+    */
+     return nonVoluntarySwitches,avgThroughput,avgTurnAroundTime,avgWaitingTime,rTime;
 }
 
 
@@ -119,15 +119,19 @@ int main(int argc, char * argv[]) {
     printf("%d\n",numPIDs);                       //Gets voluntary context switch
  
     
-    getTimeInfos(processQueue, arrayStore, numProcesses, numPIDs);
+    int nonVoluntary = 0; double avgThroughput =0;
+    double avgTurnAroundTime =0; double avgWaitingTime =0; double rTime =0;
     
+    (void)(nonVoluntary),(void)(avgThroughput),(void)(avgTurnAroundTime),(void)(avgWaitingTime),rTime = getTimeInfos(processQueue, arrayStore, numProcesses, numPIDs);
+   
+    
+    printf("%d\n", nonVoluntary);                               //nonVoluntary
+    printf("100.0\n");                                  //CPU Utilization
+    printf("%0.02f",avgThroughput);                        //Throughput
+    printf("%0.02f",avgTurnAroundTime);                         //TurnAround
+    printf("%0.02f", avgWaitingTime);                          //WaitingTime
+    printf("%0.02f", rTime);                          //rTime
+     
     return 0;
     }
-    
-
-
-
-
-
-
 
