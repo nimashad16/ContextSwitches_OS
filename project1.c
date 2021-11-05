@@ -32,9 +32,9 @@ struct ProcessInfo{
     int priorID;
 };
 
-float getThroughput(struct ProcessInfo *array, int size){
+double getThroughput(struct ProcessInfo *array, int size){
     struct ProcessInfo newArray[size];
-    int sum =0;;
+    double sum =0;;
     int a = 0;
     
     for(int x = 0; a< size;x++){           //runs a for loop to get the the every third variable after
@@ -63,12 +63,11 @@ float getThroughput(struct ProcessInfo *array, int size){
 
 
 int getWaitingTime(struct Process processQueue[],struct ProcessInfo array[], int pQSize, int arrSize){
-    
     int x = 0;
     int y=0;
     while(x < arrSize){
         y = 0;
-        while(y < pQSize && array[x].counter > 0){
+        while(y < arrSize && array[x].counter > 0){
             if (processQueue[y].PID == array[x].PID){
                 array[x].counter -= 1;
                 continue;
@@ -82,23 +81,32 @@ int getWaitingTime(struct Process processQueue[],struct ProcessInfo array[], int
     for(int a =0; a < arrSize;a++){
         sum += array[a].waitingTime;
     }
+    
     sum /= arrSize;
     
      return sum;
 }
 
-int getTurnAroundTime(struct Process processQueue[],struct ProcessInfo array[], int pQSize, int arrSize){
-    int count =0;
+int getTurnAroundTime(struct ProcessInfo array[], int arrSize){     //Total burst + total wait time / total execution
+    int sum =0;;
+    for(int a =0; a < arrSize;a++){
+        sum += array[a].waitingTime;
+    }
+    for(int a =0; a < arrSize;a++){
+        sum += array[a].bVar;
+    }
     
-    return 0;
+    sum /= arrSize;
+    
+    return sum;
 }
 
     
-int getResponseTime(struct ProcessInfo array[], int size, int numVals){                      //First time - Arrival Time
+int getResponseTime(struct ProcessInfo array[], int size, int pVal){          //First time - Arrival Time
     
     int count =0;
     for(int x =0; x< size; x++){
-            if(numVals == array[x].PID){
+            if(pVal == array[x].PID){
                 count++;
             }
         }
@@ -133,19 +141,20 @@ int main(int argc, const char * argv[]) {
         fscanf(fp,"%d %d %d", &arrayStore[a].PID, &arrayStore[a].bVar,&arrayStore[a].priorID);
     }
     
-    int check = 0;
-
     printf("%d\n",start);                       //Gets voluntary context switch
  
     printf("100.0\n");                              //CPU Utilization
     
     float result = getThroughput(arrayStore, numVals);      //Gets throughput
     printf("%.02f\n",result);
-    //float wait = getWaitingTime(arrayStore.PID,arrayStore.bVar,numVals);
-    //getResponseTime(, , numVals);
-    //printf("0.02f\n",wait);
-                           //Throughput
-   
+    
+    double answer = getTurnAroundTime(arrayStore, numVals); //Gets turnaround time
+    printf("%.02f\n", answer);
+    
+    float wait = getWaitingTime(arrayStore,numVals);
+    getResponseTime(arrayStore,numVals,newP);
+
     return 0;
 }
+
 
