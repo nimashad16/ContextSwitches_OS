@@ -50,15 +50,7 @@ double getThroughput(struct ProcessInfo *array, int size){
     double test = a-1;
     test/=sum;                              //Divides them by the total number of elements
 
-   int c, r, m;
-     m = sum*1000;
-     c = m%10; // c = 4
-     r = m/10; //
-     if(c>=5)
-     r++;
-     sum = (float)r/100;
-
-    return  test;
+  return  test;
 }
 
 
@@ -125,20 +117,28 @@ int main(int argc, const char * argv[]) {
     
     int a;
      FILE *fp = fopen(argv[1],"r");
+      struct ProcessInfo arrayStore[98307];
     
     int newP;
-    int numVals;
-    
-    struct ProcessInfo arrayStore[98307];
-    
-    fscanf(fp,"%d", &start);
-    fscanf(fp,"%d", &newP);
-    fscanf(fp,"%d", &numVals);
-    
-    
-    for(a =0; a<numVals; ++a ){
-        fscanf(fp,"%d %d %d", &arrayStore[a].PID, &arrayStore[a].bVar,&arrayStore[a].priorID);
+       int numVals;
+    if(fp == NULL){
+        scanf("%d", &start);
+        scanf("%d",&newP);
+        scanf("%d",&numVals);
+        for(a =0; a<numVals; ++a ){
+        scanf("%d %d %d", &arrayStore[a].PID, &arrayStore[a].bVar,&arrayStore[a].priorID);
+                  }
     }
+    else{
+           fscanf(fp,"%d", &start);
+           fscanf(fp,"%d", &newP);
+           fscanf(fp,"%d", &numVals);
+           
+           for(a =0; a<numVals; ++a ){
+               fscanf(fp,"%d %d %d", &arrayStore[a].PID, &arrayStore[a].bVar,&arrayStore[a].priorID);
+           }
+    }
+    
     
     printf("%d\n",start);                       //Gets voluntary context switch
  
@@ -150,8 +150,8 @@ int main(int argc, const char * argv[]) {
     double answer = getTurnAroundTime(arrayStore, numVals); //Gets turnaround time
     printf("%.02f\n", answer);
     
-   // float wait = getWaitingTime(arrayStore,numVals);
-    //getResponseTime(arrayStore,numVals,newP);
+   //float wait = getWaitingTime(arrayStore,numVals);
+    getResponseTime(arrayStore,numVals,newP);
 
     return 0;
 }
