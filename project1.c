@@ -83,7 +83,6 @@ int getWaitingTime(struct Process processQueue[],struct ProcessInfo array[], int
     }
     
     sum /= arrSize;
-    
      return sum;
 }
 
@@ -151,10 +150,9 @@ int main(int argc, const char * argv[]) {
     double answer = getTurnAroundTime(arrayStore, numVals); //Gets turnaround time
     printf("%.02f\n", answer);
     
-    float wait = getWaitingTime(arrayStore,numVals);
-    getResponseTime(arrayStore,numVals,newP);
+   // float wait = getWaitingTime(arrayStore,numVals);
+    //getResponseTime(arrayStore,numVals,newP);
 
     return 0;
 }
-
 
