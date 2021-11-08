@@ -101,10 +101,10 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
 
     rTime /= numPIDs;
 
-    printf("%d\n", numPIDs);
+   printf("%d\n", numPIDs);
     printf("%d\n", nonVoluntarySwitches);                               //nonVoluntary
 
-    printf("100.00\n");                                  //CPU Utilization
+    printf("%0.02f\n",100.00);                                  //CPU Utilization
 
     printf("%0.02f\n",avgThroughput);                        //Throughput
 
@@ -112,7 +112,7 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
 
     printf("%0.02f\n", avgWaitingTime);                          //WaitingTime
 
-    printf("%0.02f\n", rTime);                          //rTime
+    printf("%0.02f\n", rTime);
 
     return 0;
 
