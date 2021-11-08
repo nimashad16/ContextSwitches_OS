@@ -7,19 +7,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-struct Process{
+typedef struct Process{
     int PID;
     int burstTime;
     int priority;
-};
+}Process;
 
-struct ProcessInfo{
+typedef struct ProcessInfo{
     int PID;
     int totalBurstTime;
     int waitingTime;
     int responseTime;
     int pCtr;
-};
+}ProcessInfo;
 
 int calcContextSwitches(struct Process *processQueue, int numProcesses){
     //int prevID = 0;
@@ -68,7 +68,7 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
     totalContextSwitches = calcContextSwitches(processQueue, numProcesses);
     nonVoluntarySwitches = totalContextSwitches - volSwitches;
     int allBurstTimes = 0;
-    double avgThroughput = 0.0;
+    double avgThroughput;
     double avgTurnAroundTime = 0.0;
     double avgWaitingTime = 0.0;
     double rTime = 0.0;
@@ -101,8 +101,6 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
 
     rTime /= numPIDs;
 
-    printf("%d\n", numPIDs);
-
     printf("%d\n", nonVoluntarySwitches);                               //nonVoluntary
 
     printf("100.0\n");                                  //CPU Utilization
@@ -126,8 +124,6 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
 
 int main(int argc, char * argv[]) {
 
-
-
     int start;
 
     int numPIDs;
@@ -137,7 +133,9 @@ int main(int argc, char * argv[]) {
     FILE* fp;
 
     if (argc < 1) {
+
         fp = fopen(argv[1],"r");
+
     }
 
     else {
@@ -152,18 +150,16 @@ int main(int argc, char * argv[]) {
 
     fscanf(fp,"%d", &numProcesses);
 
+    ProcessInfo* arrayStore = calloc(numPIDs,sizeof(arrayStore));
 
-
-    struct ProcessInfo* arrayStore = calloc(numPIDs*sizeof(arrayStore));
-
-    struct Process* processQueue = calloc(numProcesses*sizeof(processQueue));
+    Process* processQueue = calloc(numProcesses,sizeof(processQueue));
     for (int i = 0; i < numPIDs; i++){
         arrayStore[i].totalBurstTime= 0;
         arrayStore[i].waitingTime = 0;
         arrayStore[i].responseTime = 0;
         arrayStore[i].pCtr = 0;
     }
-
+    printf("%d\n",numPIDs);
     int a;
     int PID,burstTime,priority;
     for(a = 0;  a < numProcesses; a++ ){
