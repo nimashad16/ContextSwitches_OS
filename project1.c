@@ -165,9 +165,10 @@ int main(int argc, char **argv) {
 
         arrayStore[PID-1].pCtr += 1;
     }
-    for (int i = 0; i < numProcesses; i++){
+   /* for (int i = 0; i < numProcesses; i++){
         printf("%d %d %d",processQueue[i].PID,processQueue[i].burstTime,processQueue[i].priority);
     }
+    */
     getTimeInfos(processQueue,arrayStore,numProcesses,numPIDs);
     return 0;
 }
