@@ -66,7 +66,11 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
         x++;
     }
     totalContextSwitches = calcContextSwitches(processQueue, numProcesses);
-    nonVoluntarySwitches = totalContextSwitches - volSwitches;
+    nonVoluntarySwitches = totalContextSwitches - volSwitches -2;
+    
+    if(nonVoluntarySwitches < 0){
+        nonVoluntarySwitches =0;
+    }
     int allBurstTimes = 0;
     double avgThroughput;
     double avgTurnAroundTime = 0.0;
