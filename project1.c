@@ -132,8 +132,8 @@ int main(int argc, char **argv) {
     int numProcesses;
 
     FILE* fp;
-    //fp = stdin;
-    fp = fopen(argv[1],"r");
+    fp = stdin;
+    //fp = fopen(argv[1],"r");
 
     fscanf(fp,"%d", &start);
 
