@@ -132,11 +132,8 @@ int main(int argc, char **argv) {
     int numProcesses;
 
     FILE* fp;
-    
-        fp = fopen(argv[1],"r");
-        
 
-     
+    fp = fopen(argv[1],"r");
 
     fscanf(fp,"%d", &start);
 
@@ -170,4 +167,3 @@ int main(int argc, char **argv) {
     getTimeInfos(processQueue,arrayStore,numProcesses,numPIDs);
     return 0;
 }
-
