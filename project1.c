@@ -101,6 +101,7 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
 
     rTime /= numPIDs;
 
+    printf("%d\n", numPIDs);
     printf("%d\n", nonVoluntarySwitches);                               //nonVoluntary
 
     printf("100.0\n");                                  //CPU Utilization
