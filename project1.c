@@ -1,12 +1,12 @@
 //  main.c
 //  Project1
 //
-//  Created by Nima Shadaram on 10/28/21.
-//  Copyright © 2021 Nima Shagaram. All rights reserved.
+//  Created by Nima $wagaram on 11/1/21.
+//  Copyright © 2021 Nima $wagaram. All rights reserved.
 //
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 typedef struct Process{
     int PID;
     int burstTime;
@@ -23,7 +23,7 @@ typedef struct ProcessInfo{
 
 int calcContextSwitches(struct Process *processQueue, int numProcesses){
     //int prevID = 0;
-    int totalCS = 0;
+    int totalCS;
     for (int i = 0; i < numProcesses - 1; i++){
         if (processQueue[i+1].PID != processQueue[i].PID){
             totalCS += 1;
@@ -60,13 +60,13 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
             }
             y++;
         }
+        /*printf("%d\n",array[x].PID);
+        printf("%d\n",array[x].responseTime);
+        printf("%d\n",array[x].waitingTime);*/
         x++;
     }
     totalContextSwitches = calcContextSwitches(processQueue, numProcesses);
-    nonVoluntarySwitches = totalContextSwitches - volSwitches - 2;
-    if(nonVoluntarySwitches < 0){
-        nonVoluntarySwitches = 0;
-    }
+    nonVoluntarySwitches = totalContextSwitches - volSwitches;
     int allBurstTimes = 0;
     double avgThroughput;
     double avgTurnAroundTime = 0.0;
@@ -112,7 +112,7 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
 
     printf("%0.02f\n", avgWaitingTime);                          //WaitingTime
 
-    printf("%0.02f\n", rTime);
+    printf("%0.02f\n", rTime);                          //rTime
 
     return 0;
 
@@ -123,7 +123,7 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
 
 
 
-int main(int argc, char ** argv) {
+int main(int argc, char **argv) {
 
     int start;
 
@@ -133,8 +133,17 @@ int main(int argc, char ** argv) {
 
     FILE* fp;
 
-    fp = fopen(argv[1],"r");
+    if (argc < 1) {
 
+        fp = fopen(argv[1],"r");
+
+    }
+
+    else {
+
+        fp = stdin;
+
+    }
 
     fscanf(fp,"%d", &start);
 
@@ -142,18 +151,19 @@ int main(int argc, char ** argv) {
 
     fscanf(fp,"%d", &numProcesses);
 
-    ProcessInfo* arrayStore = malloc(numPIDs*sizeof(arrayStore));
+    ProcessInfo* arrayStore = calloc(numPIDs,sizeof(arrayStore));
 
-    Process* processQueue = malloc(numProcesses*sizeof(processQueue));
+    Process* processQueue = calloc(numProcesses,sizeof(processQueue));
     for (int i = 0; i < numPIDs; i++){
         arrayStore[i].totalBurstTime= 0;
         arrayStore[i].waitingTime = 0;
         arrayStore[i].responseTime = 0;
         arrayStore[i].pCtr = 0;
     }
+    //printf("%d\n",numPIDs);
     int a;
     int PID,burstTime,priority;
-    for(a = 0;  a <= numProcesses -1; a++ ){
+    for(a = 0;  a < numProcesses; a++ ){
 
         fscanf(fp,"%d %d %d", &PID, &burstTime,&priority);
         processQueue[a].PID = PID;
