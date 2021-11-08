@@ -1,7 +1,8 @@
 //  main.c
+
 //  Project1
 //
-//  Created by Nima $wagaram on 11/1/21.
+//  Created by Nima $wagaram on 10/28/21.
 //  Copyright © 2021 Nima $wagaram. All rights reserved.
 //
 #include <stdio.h>
@@ -132,8 +133,8 @@ int main(int argc, char **argv) {
     int numProcesses;
 
     FILE* fp;
-    fp = stdin;
-    //fp = fopen(argv[1],"r");
+    //fp = stdin;
+    fp = fopen(argv[1],"r");
 
     fscanf(fp,"%d", &start);
 
