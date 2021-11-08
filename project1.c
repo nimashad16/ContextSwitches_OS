@@ -141,9 +141,9 @@ int main(int argc, char ** argv) {
 
     fscanf(fp,"%d", &numProcesses);
 
-    ProcessInfo* arrayStore = calloc(numPIDs,sizeof(arrayStore));
+    ProcessInfo* arrayStore = malloc(numPIDs*sizeof(arrayStore));
 
-    Process* processQueue = calloc(numProcesses,sizeof(processQueue));
+    Process* processQueue = malloc(numProcesses*sizeof(processQueue));
     for (int i = 0; i < numPIDs; i++){
         arrayStore[i].totalBurstTime= 0;
         arrayStore[i].waitingTime = 0;
