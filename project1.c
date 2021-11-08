@@ -154,9 +154,9 @@ int main(int argc, char * argv[]) {
 
 
 
-    struct ProcessInfo* arrayStore = malloc(numPIDs*sizeof(arrayStore));
+    struct ProcessInfo* arrayStore = calloc(numPIDs*sizeof(arrayStore));
 
-    struct Process* processQueue = malloc(numProcesses*sizeof(processQueue));
+    struct Process* processQueue = calloc(numProcesses*sizeof(processQueue));
     for (int i = 0; i < numPIDs; i++){
         arrayStore[i].totalBurstTime= 0;
         arrayStore[i].waitingTime = 0;
