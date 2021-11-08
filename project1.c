@@ -23,7 +23,7 @@ typedef struct ProcessInfo{
 
 int calcContextSwitches(struct Process *processQueue, int numProcesses){
     //int prevID = 0;
-    int totalCS;
+    int totalCS = 0;
     for (int i = 0; i < numProcesses - 1; i++){
         if (processQueue[i+1].PID != processQueue[i].PID){
             totalCS += 1;
@@ -35,7 +35,7 @@ int calcContextSwitches(struct Process *processQueue, int numProcesses){
 
 int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int numProcesses, int numPIDs){
 
-    int totalContextSwitches = 0;
+    int totalContextSwitches;
     int nonVoluntarySwitches;
     int x = 0;
     int y;
@@ -164,7 +164,6 @@ int main(int argc, char **argv) {
     int a;
     int PID,burstTime,priority;
     for(a = 0;  a < numProcesses; a++ ){
-
         fscanf(fp,"%d %d %d", &PID, &burstTime,&priority);
         processQueue[a].PID = PID;
         processQueue[a].burstTime = burstTime;
