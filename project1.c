@@ -66,11 +66,7 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
         x++;
     }
     totalContextSwitches = calcContextSwitches(processQueue, numProcesses);
-    nonVoluntarySwitches = totalContextSwitches - volSwitches -2;
-    
-    if(nonVoluntarySwitches < 0){
-        nonVoluntarySwitches =0;
-    }
+    nonVoluntarySwitches = totalContextSwitches - volSwitches;
     int allBurstTimes = 0;
     double avgThroughput;
     double avgTurnAroundTime = 0.0;
@@ -136,7 +132,7 @@ int main(int argc, char **argv) {
     int numProcesses;
 
     FILE* fp;
-
+    //fp = stdin;
     fp = fopen(argv[1],"r");
 
     fscanf(fp,"%d", &start);
@@ -148,7 +144,7 @@ int main(int argc, char **argv) {
     ProcessInfo* arrayStore = calloc(numPIDs,sizeof(arrayStore));
 
     Process* processQueue = calloc(numProcesses,sizeof(processQueue));
-    for (int i = 0; i < numPIDs; i++){
+    for (int i = 0; i < numProcesses; i++){
         arrayStore[i].totalBurstTime= 0;
         arrayStore[i].waitingTime = 0;
         arrayStore[i].responseTime = 0;
@@ -167,6 +163,9 @@ int main(int argc, char **argv) {
         arrayStore[PID-1].totalBurstTime += burstTime;
 
         arrayStore[PID-1].pCtr += 1;
+    }
+    for (int i = 0; i < numProcesses; i++){
+        printf("%d %d %d",processQueue[i].PID,processQueue[i].burstTime,processQueue[i].priority);
     }
     getTimeInfos(processQueue,arrayStore,numProcesses,numPIDs);
     return 0;
