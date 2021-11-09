@@ -1,8 +1,7 @@
 //  main.c
-
 //  Project1
 //
-//  Created by Nima $wagaram on 10/28/21.
+//  Created by Nima $wagaram on 11/1/21.
 //  Copyright © 2021 Nima $wagaram. All rights reserved.
 //
 #include <stdio.h>
@@ -67,9 +66,11 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
         x++;
     }
     totalContextSwitches = calcContextSwitches(processQueue, numProcesses);
-    nonVoluntarySwitches = totalContextSwitches - volSwitches;
-    
+    nonVoluntarySwitches = totalContextSwitches - volSwitches -2;
 
+    if(nonVoluntarySwitches < 0){
+        nonVoluntarySwitches =0;
+    }
     int allBurstTimes = 0;
     double avgThroughput;
     double avgTurnAroundTime = 0.0;
@@ -129,25 +130,24 @@ int getTimeInfos(struct Process *processQueue,struct ProcessInfo *array, int num
 int main(int argc, char **argv) {
 
     int start;
-
     int numPIDs;
-
     int numProcesses;
 
     FILE* fp;
-    //fp = stdin;
-    fp = fopen(argv[1],"r");
 
+    //fp = fopen(argv[1],"r");
+    fp = stdin;
     fscanf(fp,"%d", &start);
 
     fscanf(fp,"%d", &numPIDs);
 
     fscanf(fp,"%d", &numProcesses);
 
-    ProcessInfo* arrayStore = calloc(numPIDs,sizeof(arrayStore));
+    ProcessInfo* arrayStore = calloc(numPIDs,sizeof(struct ProcessInfo));
 
-    Process* processQueue = calloc(numProcesses,sizeof(processQueue));
-    for (int i = 0; i < numProcesses; i++){
+    Process* processQueue = calloc(numProcesses,sizeof(struct Process));
+
+    for (int i = 0; i < numPIDs; i++){
         arrayStore[i].totalBurstTime= 0;
         arrayStore[i].waitingTime = 0;
         arrayStore[i].responseTime = 0;
@@ -167,10 +167,9 @@ int main(int argc, char **argv) {
 
         arrayStore[PID-1].pCtr += 1;
     }
-   /* for (int i = 0; i < numProcesses; i++){
-        printf("%d %d %d",processQueue[i].PID,processQueue[i].burstTime,processQueue[i].priority);
-    }
-    */
+//    for (int i = 0; i < numProcesses; i++){
+//        printf("%d %d %d",processQueue[i].PID,processQueue[i].burstTime,processQueue[i].priority);
+//    }
     getTimeInfos(processQueue,arrayStore,numProcesses,numPIDs);
     return 0;
 }
