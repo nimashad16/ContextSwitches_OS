@@ -135,8 +135,8 @@ int main(int argc, char **argv) {
 
     FILE* fp;
 
-    //fp = fopen(argv[1],"r");
-    fp = stdin;
+    fp = fopen(argv[1],"r");
+   // fp = stdin;
     fscanf(fp,"%d", &start);
 
     fscanf(fp,"%d", &numPIDs);
