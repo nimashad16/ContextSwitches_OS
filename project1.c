@@ -1,9 +1,4 @@
-//  main.c
-//  Project1
-//
-//  Created by Nima $wagaram on 11/1/21.
-//  Copyright © 2021 Nima $wagaram. All rights reserved.
-//
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
